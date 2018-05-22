@@ -8,6 +8,7 @@ public class Player : MonoBehaviour {
     //private Rigidbody2D rb2d;
     public int speed = 10;
 
+    // static speed modifier that is modified by test buttons in the main menu when doing user testing on player speed
     public static float speedM = 1f;
 
     public int goodGuyScore;
