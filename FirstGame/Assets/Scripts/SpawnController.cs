@@ -74,8 +74,9 @@ public class SpawnController : MonoBehaviour {
                         modifiedCount += 1;
                         spawners[j].GetComponent<Spawner>().recentlyModified = true;
                         nextIncrease += increaseInterval;
-                        spawners[j].GetComponent<Spawner>().timeMax -= 0.25f;
                         spawners[j].GetComponent<Spawner>().spawnTime = Random.Range(spawners[j].GetComponent<Spawner>().timeMin, spawners[j].GetComponent<Spawner>().timeMax);
+                        spawners[j].GetComponent<Spawner>().timeMax -= 0.25f;
+                        spawners[j].GetComponent<Spawner>().timeMin -= 0.25f;
                         //spawners[j].GetComponent<Spawner>().spawnDelay = Random.Range(spawnMin, spawnMax);
                     }
                     else
