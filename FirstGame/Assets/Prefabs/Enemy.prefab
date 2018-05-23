@@ -100,9 +100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb2d: {fileID: 0}
-  increaseGravity: 0.2
-  increaseGravityInterval: 10
-  maxGravity: 6
+  increaseGravity: 0.5
+  increaseGravityInterval: 20
+  maxGravity: 5
   enemyScore: 1
 --- !u!212 &212984959227021708
 SpriteRenderer:

@@ -7,18 +7,18 @@ public class SpawnController : MonoBehaviour {
     public static SpawnController instance;
 
     public GameObject spawnerPrefab;
-    //public float timeMin = 0.25f;
-    //public float timeMax = 4f;
     public float startMin = 3f;
     public float startMax = 7f;
     public float spawnMin = 2f;
     public float spawnMax = 5f;
 
     private float nextIncrease = 0f;
-    private float increaseInterval = 5f;
+    private float increaseInterval = 3f;
 
     private float invokeResetIncrease = 15f;
     private float increaseInvokeReset = 15f;
+
+    private float modifiedCount = 0;
 
     //public Spawner[] spawners;
     public GameObject[] spawners;
@@ -37,9 +37,11 @@ public class SpawnController : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start() {
-        //spawners = new Spawner[numSpawners];
-        spawners = new GameObject[numSpawners];
+    void Start()
+    //private void OnLevelWasLoaded()
+    {
+    //spawners = new Spawner[numSpawners];
+    spawners = new GameObject[numSpawners];
         int j = -14;
         for (int i = 0; i < numSpawners; i++)
         {
@@ -63,30 +65,43 @@ public class SpawnController : MonoBehaviour {
             }
             else
             {
-                if (Time.time >= nextIncrease)
+                if (Time.timeSinceLevelLoad >= nextIncrease)
                 {
-                    if (spawners[j].GetComponent<Spawner>().timeMax > spawners[j].GetComponent<Spawner>().timeMin)
+                    Debug.Log(Time.timeSinceLevelLoad);
+                    Debug.Log(j);
+                    if (spawners[j].GetComponent<Spawner>().timeMax > spawners[j].GetComponent<Spawner>().timeMin && spawners[j].GetComponent<Spawner>().recentlyModified == false)
                     {
+                        modifiedCount += 1;
+                        spawners[j].GetComponent<Spawner>().recentlyModified = true;
                         nextIncrease += increaseInterval;
                         spawners[j].GetComponent<Spawner>().timeMax -= 0.25f;
                         spawners[j].GetComponent<Spawner>().spawnTime = Random.Range(spawners[j].GetComponent<Spawner>().timeMin, spawners[j].GetComponent<Spawner>().timeMax);
-                        spawners[j].GetComponent<Spawner>().spawnDelay = Random.Range(spawnMin, spawnMax);
+                        //spawners[j].GetComponent<Spawner>().spawnDelay = Random.Range(spawnMin, spawnMax);
                     }
                     else
                     {
                         spawners[j].GetComponent<Spawner>().spawnTime = spawners[j].GetComponent<Spawner>().timeMin;
-                        spawners[j].GetComponent<Spawner>().spawnDelay = Random.Range(spawnMin, spawnMax);
+                        //spawners[j].GetComponent<Spawner>().spawnDelay = Random.Range(spawnMin, spawnMax);
                     }
                 }
             }
 
-            if (Time.time >= invokeResetIncrease)
+            if (modifiedCount >= numSpawners)
+            {
+                for (int a = 0; a < numSpawners; a++)
+                {
+                    spawners[a].GetComponent<Spawner>().recentlyModified = false;
+                }
+            }
+
+            if (Time.timeSinceLevelLoad >= invokeResetIncrease)
             {
                 invokeResetIncrease += increaseInvokeReset;
                 for (int k = 0; k < numSpawners; k++)
                 {
                     spawners[k].GetComponent<Spawner>().CancelInvoke("Spawn");
                     spawners[k].GetComponent<Spawner>().beingInvoked = false;
+                    spawners[k].GetComponent<Spawner>().spawnDelay = Random.Range(0f, 2f);
                 }
             }
 

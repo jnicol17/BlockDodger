@@ -5,9 +5,9 @@ using UnityEngine;
 public class Enemy : MonoBehaviour {
 
     [HideInInspector] public Rigidbody2D rb2d;
-    public float increaseGravity = 0.2f;
-    public float increaseGravityInterval = 10f;
-    public float maxGravity = 6f;
+    public float increaseGravity = 0.5f;
+    public float increaseGravityInterval = 20f;
+    public float maxGravity = 5f;
 
     public int enemyScore;
 
@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour {
         else
         {
             // if increaseGravityInterval seconds have passed and we havent reached max gravity yet, increase gravity by increaseGravity amount
-            if (Time.time >= increaseGravityInterval && rb2d.gravityScale < maxGravity)
+            if (Time.timeSinceLevelLoad >= increaseGravityInterval && rb2d.gravityScale < maxGravity)
             {
                 increaseGravityInterval += increaseGravityInterval;
                 rb2d.gravityScale += increaseGravity;
