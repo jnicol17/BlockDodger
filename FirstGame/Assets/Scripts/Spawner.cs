@@ -9,7 +9,7 @@ public class Spawner : MonoBehaviour {
     public float timeMin = 3f;
     public float timeMax = 7f;
     [HideInInspector] public bool beingInvoked = false;
-    [HideInInspector] public bool recentlyModified = false;
+    //[HideInInspector] public bool recentlyModified = false;
     public GameObject enemies;
     public GameObject goodGuy;
 
