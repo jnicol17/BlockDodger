@@ -96,7 +96,7 @@ public class SpawnController : MonoBehaviour {
                 {
                     spawners[k].GetComponent<Spawner>().CancelInvoke("Spawn");
                     spawners[k].GetComponent<Spawner>().beingInvoked = false;
-                    spawners[k].GetComponent<Spawner>().spawnDelay = Random.Range(0f, 2f);
+                    spawners[k].GetComponent<Spawner>().spawnDelay = Random.Range(0f, 1f);
                 }
             }
 
