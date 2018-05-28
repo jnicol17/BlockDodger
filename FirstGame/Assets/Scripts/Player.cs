@@ -53,7 +53,7 @@ public class Player : MonoBehaviour {
             //{
             //    transform.position = Vector3.MoveTowards(transform.position, transform.position + movement, move);
             //}
-            float x = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, -14f, 14f);
+            float x = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, -14.1f, 14.1f);
             //Debug.Log(x);
             //if (x <= 14f && x >= -14f)
             //{
@@ -79,10 +79,6 @@ public class Player : MonoBehaviour {
         {
             GameController.instance.PlayerScored(goodGuyScore);
             Destroy(other.gameObject);
-        }
-        else if (other.gameObject.CompareTag("Wall"))
-        {
-            this.transform.position = new Vector2(this.transform.position.x - 0.1f, -5.46f);
         }
     }
 }
