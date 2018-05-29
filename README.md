@@ -11,4 +11,4 @@ Work in Progress Features:
 3. Sound effects
 4. Volume
 5. Controls menu
-6. Adjust enemy fall speed and spawn time
+~~6. Adjust enemy fall speed and spawn time~~ Good for now.
