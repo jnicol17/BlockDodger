@@ -12,7 +12,7 @@ public class SpawnController : MonoBehaviour {
     public float spawnMin = 2f;
     public float spawnMax = 4f;
 
-    private float minSpawnTime = 0.25f;
+    private float minSpawnTime = 0.5f;
 
     private float nextIncrease = 0f;
     private float increaseInterval = 3f;
@@ -86,7 +86,7 @@ public class SpawnController : MonoBehaviour {
                 if (spawners[max].GetComponent<Spawner>().timeMin > minSpawnTime)
                 {
                     spawners[max].GetComponent<Spawner>().spawnTime = Random.Range(spawners[max].GetComponent<Spawner>().timeMin, spawners[max].GetComponent<Spawner>().spawnTime);
-                    spawners[max].GetComponent<Spawner>().timeMin -= 0.25f;
+                    spawners[max].GetComponent<Spawner>().timeMin -= 0.5f;
                     spawners[max].GetComponent<Spawner>().CancelInvoke("Spawn");
                     spawners[max].GetComponent<Spawner>().spawnDelay = Random.Range(0f, 1f);
                     invokeSpawner(max);
