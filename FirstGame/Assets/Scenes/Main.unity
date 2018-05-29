@@ -1041,9 +1041,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnerPrefab: {fileID: 1223676019902466, guid: c1f83563d4590574f9150771fe5d5878,
     type: 2}
-  startMin: 3
-  startMax: 7
+  startMin: 2
+  startMax: 5
   spawnMin: 2
-  spawnMax: 5
+  spawnMax: 4
   spawners: []
   numSpawners: 15

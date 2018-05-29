@@ -7,18 +7,18 @@ public class SpawnController : MonoBehaviour {
     public static SpawnController instance;
 
     public GameObject spawnerPrefab;
-    public float startMin = 3f;
-    public float startMax = 7f;
+    public float startMin = 2f;
+    public float startMax = 5f;
     public float spawnMin = 2f;
-    public float spawnMax = 5f;
+    public float spawnMax = 4f;
 
     private float minSpawnTime = 0.25f;
 
     private float nextIncrease = 0f;
     private float increaseInterval = 3f;
 
-    private float invokeResetIncrease = 15f;
-    private float increaseInvokeReset = 15f;
+    //private float invokeResetIncrease = 15f;
+    //private float increaseInvokeReset = 15f;
 
     private int max = 0;
 
@@ -53,6 +53,7 @@ public class SpawnController : MonoBehaviour {
             spawners[i].GetComponent<Spawner>().spawnTime = Random.Range(startMin, startMax);
             spawners[i].GetComponent<Spawner>().spawnDelay = Random.Range(spawnMin, spawnMax);
             j += 2;
+            invokeSpawner(i);
         }
 	}
 	
@@ -62,10 +63,10 @@ public class SpawnController : MonoBehaviour {
         if (!GameController.instance.gameOver)
         {
 
-            if (!spawners[0].GetComponent<Spawner>().beingInvoked)
-            {
-                invokeSpawners();
-            }
+            //if (!spawners[0].GetComponent<Spawner>().beingInvoked)
+            //{
+            //    invokeSpawners();
+            //}
 
             if (Time.timeSinceLevelLoad >= nextIncrease)
             {
@@ -82,23 +83,27 @@ public class SpawnController : MonoBehaviour {
                 Debug.Log(max);
 
                 nextIncrease += increaseInterval;
-                spawners[max].GetComponent<Spawner>().spawnTime = Random.Range(spawners[max].GetComponent<Spawner>().timeMin, spawners[max].GetComponent<Spawner>().spawnTime);
-                if (spawners[max].GetComponent<Spawner>().timeMin > minSpawnTime) {
-                    spawners[max].GetComponent<Spawner>().timeMin -= 0.25f;
-                }
-
-            }
-
-            if (Time.timeSinceLevelLoad >= invokeResetIncrease)
-            {
-                invokeResetIncrease += increaseInvokeReset;
-                for (int k = 0; k < numSpawners; k++)
+                if (spawners[max].GetComponent<Spawner>().timeMin > minSpawnTime)
                 {
-                    spawners[k].GetComponent<Spawner>().CancelInvoke("Spawn");
-                    spawners[k].GetComponent<Spawner>().beingInvoked = false;
-                    spawners[k].GetComponent<Spawner>().spawnDelay = Random.Range(0f, 1f);
+                    spawners[max].GetComponent<Spawner>().spawnTime = Random.Range(spawners[max].GetComponent<Spawner>().timeMin, spawners[max].GetComponent<Spawner>().spawnTime);
+                    spawners[max].GetComponent<Spawner>().timeMin -= 0.25f;
+                    spawners[max].GetComponent<Spawner>().CancelInvoke("Spawn");
+                    spawners[max].GetComponent<Spawner>().spawnDelay = Random.Range(0f, 1f);
+                    invokeSpawner(max);
                 }
+
             }
+
+            //if (Time.timeSinceLevelLoad >= invokeResetIncrease)
+            //{
+            //    invokeResetIncrease += increaseInvokeReset;
+            //    for (int k = 0; k < numSpawners; k++)
+            //    {
+            //        spawners[k].GetComponent<Spawner>().CancelInvoke("Spawn");
+            //        spawners[k].GetComponent<Spawner>().beingInvoked = false;
+            //        spawners[k].GetComponent<Spawner>().spawnDelay = Random.Range(0f, 1f);
+            //    }
+            //}
 
             int spawnGoodGuy = Random.Range(0, 1000);
             if (spawnGoodGuy == 555)
@@ -109,12 +114,12 @@ public class SpawnController : MonoBehaviour {
         }
 	}
 
-    void invokeSpawners()
+    void invokeSpawner(int j)
     {
-        for (int j = 0; j < numSpawners; j++)
-        {
-            spawners[j].GetComponent<Spawner>().beingInvoked = true;
+        //for (int j = 0; j < numSpawners; j++)
+        //{
+            //spawners[j].GetComponent<Spawner>().beingInvoked = true;
             spawners[j].GetComponent<Spawner>().InvokeRepeating("Spawn", spawners[j].GetComponent<Spawner>().spawnDelay, spawners[j].GetComponent<Spawner>().spawnTime);
-        }
+        //}
     }
 }
