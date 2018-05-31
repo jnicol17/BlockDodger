@@ -13,6 +13,10 @@ public class GameController : MonoBehaviour {
     private int score = 0;
     public Text scoreText;
 
+    public Text highscoreText;
+
+    //private int highScore;
+    GameDetails gd;
     void Awake()
     {
         if (instance == null)
@@ -25,10 +29,19 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    // Use this for initialization
+    // Use this for initialization  
     void Start () {
         Cursor.visible = false;
-	}
+        if (GameDetailContainer.LoadedGameDetails != null)
+        {
+            gd = GameDetailContainer.LoadedGameDetails;
+        }
+        else
+        {
+            gd = new GameDetails();
+        }
+        //highScore = DataAccess.Load().getHighScore();
+    }
 
     // Update is called once per frame
     void Update()
@@ -57,6 +70,14 @@ public class GameController : MonoBehaviour {
     public void PlayerDied()
     {
         gameOver = true;
+        //if (score > highScore)
+        //{
+            //highScore = score;
+            //gd.setHighScore(highScore);
+            //DataAccess.Save(gd);
+        //}
+        highscoreText.text = "Highscore: " + gd.highscore.ToString();
+        //highscoreText.text = "TEST";
         gameOverText.SetActive(true);
         Cursor.visible = true;
     }
@@ -71,7 +92,7 @@ public class GameController : MonoBehaviour {
         //#else
         // Application.Quit();
         //#endif
-
+        DataAccess.Save(gd);
         SceneManager.LoadScene("Menu");
     }
 

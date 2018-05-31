@@ -7,6 +7,8 @@ public class MainMenu : MonoBehaviour {
     
     public void PlayGame()
     {
+        // getting error on first ever run, look into it
+        GameDetailContainer.LoadedGameDetails = DataAccess.Load();
         SceneManager.LoadScene("Main");
     }
 
