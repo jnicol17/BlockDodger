@@ -70,12 +70,12 @@ public class GameController : MonoBehaviour {
     public void PlayerDied()
     {
         gameOver = true;
-        //if (score > highScore)
-        //{
-            //highScore = score;
+        if (score > gd.highscore)
+        {
+            gd.highscore = score;
             //gd.setHighScore(highScore);
             //DataAccess.Save(gd);
-        //}
+        }
         highscoreText.text = "Highscore: " + gd.highscore.ToString();
         //highscoreText.text = "TEST";
         gameOverText.SetActive(true);
