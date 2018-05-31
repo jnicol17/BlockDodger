@@ -64,6 +64,10 @@ public class Player : MonoBehaviour {
                 //this.transform.position = new Vector2(this.transform.position.x, -5.46f);
             //}
         }
+        else
+        {
+            this.transform.position = new Vector2(0, -5.46f);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
