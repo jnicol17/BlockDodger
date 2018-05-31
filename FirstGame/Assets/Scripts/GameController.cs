@@ -14,9 +14,10 @@ public class GameController : MonoBehaviour {
     public Text scoreText;
 
     public Text highscoreText;
-
-    //private int highScore;
     GameDetails gd;
+
+    public bool newHighScore = false;
+
     void Awake()
     {
         if (instance == null)
@@ -32,6 +33,7 @@ public class GameController : MonoBehaviour {
     // Use this for initialization  
     void Start () {
         Cursor.visible = false;
+        GameDetailContainer.LoadedGameDetails = DataAccess.Load();
         if (GameDetailContainer.LoadedGameDetails != null)
         {
             gd = GameDetailContainer.LoadedGameDetails;
@@ -40,7 +42,7 @@ public class GameController : MonoBehaviour {
         {
             gd = new GameDetails();
         }
-        //highScore = DataAccess.Load().getHighScore();
+        highscoreText.text = "Highscore: " + gd.highscore.ToString();
     }
 
     // Update is called once per frame
@@ -63,21 +65,30 @@ public class GameController : MonoBehaviour {
         {
             return;
         }
+
         score += scoreMultiplier;
         scoreText.text = "Score: " + score.ToString();
+
+        if (score > gd.highscore)
+        {
+            gd.highscore = score;
+            highscoreText.text = "Highscore: " + score.ToString();
+        }
+
     }
 
     public void PlayerDied()
     {
         gameOver = true;
-        if (score > gd.highscore)
-        {
-            gd.highscore = score;
+        //if (score > gd.highscore)
+        //{
+        //    gd.highscore = score;
             //gd.setHighScore(highScore);
             //DataAccess.Save(gd);
-        }
+        //}
         highscoreText.text = "Highscore: " + gd.highscore.ToString();
-        //highscoreText.text = "TEST";
+
+        DataAccess.Save(gd);
         gameOverText.SetActive(true);
         Cursor.visible = true;
     }
@@ -92,7 +103,6 @@ public class GameController : MonoBehaviour {
         //#else
         // Application.Quit();
         //#endif
-        DataAccess.Save(gd);
         SceneManager.LoadScene("Menu");
     }
 
