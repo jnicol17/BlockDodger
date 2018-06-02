@@ -1,5 +1,8 @@
 ﻿using System;
 
+// this code is the GameDetails that are stored in persistant data
+// currently only the highscore is saved, soon game settings will be included
+
 [Serializable]
 public class GameDetails{
 
@@ -8,15 +11,5 @@ public class GameDetails{
     public GameDetails()
     {
         this.highscore = 0;
-    }
-
-    public int getHighScore()
-    {
-        return this.highscore;
-    }
-
-    public void setHighScore(int newHighScore)
-    {
-        this.highscore = newHighScore;
     }
 }

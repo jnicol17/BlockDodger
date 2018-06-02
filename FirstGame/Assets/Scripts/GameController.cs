@@ -59,6 +59,8 @@ public class GameController : MonoBehaviour {
         }
     }
 
+    // called everytime the player scores
+    // either from enemy hitting ground or player hitting bonus cube
     public void PlayerScored(int scoreMultiplier)
     {
         if (gameOver)
@@ -77,32 +79,25 @@ public class GameController : MonoBehaviour {
 
     }
 
+    // called when the player gets hit by enemy (and dies)
     public void PlayerDied()
     {
+        // this boolean is used in multiple classes update functions
         gameOver = true;
-        //if (score > gd.highscore)
-        //{
-        //    gd.highscore = score;
-            //gd.setHighScore(highScore);
-            //DataAccess.Save(gd);
-        //}
         highscoreText.text = "Highscore: " + gd.highscore.ToString();
 
+        // save the game details (currently just the new/same highscore)
         DataAccess.Save(gd);
+
+        // text that tells user to restart or return to main menu 
         gameOverText.SetActive(true);
+        // set mouse to visible
         Cursor.visible = true;
     }
 
+    // return to main menu
     private void QuitGame()
     {
-        // save any game data here
-        //#if UNITY_EDITOR
-        // Application.Quit() does not work in the editor so
-        // UnityEditor.EditorApplication.isPlaying need to be set to false to end the game
-        //    UnityEditor.EditorApplication.isPlaying = false;
-        //#else
-        // Application.Quit();
-        //#endif
         SceneManager.LoadScene("Menu");
     }
 

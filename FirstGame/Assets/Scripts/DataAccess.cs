@@ -4,6 +4,12 @@ using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
+// this code is for accessing and saving the web browser saved data
+// original code is from: http://amalgamatelabs.com/Blog/4/data_persistence
+
+// modified the load function to remove the try/catch and replace with an if statement, will return null GameDetails if new
+// this is okay because we have a null check
+
 public class DataAccess
 {
     [DllImport("__Internal")]
@@ -45,29 +51,20 @@ public class DataAccess
     }
 
     public static GameDetails Load()
-    //public static int Load()
     {
         GameDetails gameDetails = null;
         string dataPath = string.Format("{0}/GameDetails.dat", Application.persistentDataPath);
+        if (File.Exists(dataPath))
+        {
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            FileStream fileStream = File.Open(dataPath, FileMode.Open);
 
-        //try
-        //{
-            if (File.Exists(dataPath))
-            {
-                BinaryFormatter binaryFormatter = new BinaryFormatter();
-                FileStream fileStream = File.Open(dataPath, FileMode.Open);
+            gameDetails = (GameDetails)binaryFormatter.Deserialize(fileStream);
+            fileStream.Close();
+        }
 
-                gameDetails = (GameDetails)binaryFormatter.Deserialize(fileStream);
-                fileStream.Close();
-            }
-        //}
-        //catch (Exception e)
-        //{
-        //    PlatformSafeMessage("Failed to Load: " + e.Message);
-        //}
 
         return gameDetails;
-        //return gameDetails.highscore;
     } 
 
     private static void PlatformSafeMessage(string message)
