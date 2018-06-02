@@ -2,45 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// this script controls the spawner prefab
+
 public class Spawner : MonoBehaviour {
 
-    public float spawnTime = 5f;        // The amount of time between each spawn.
-    public float spawnDelay = 3f;       // The amount of time before spawning starts.
+    public float spawnTime;        // The amount of time between each spawn.
+    public float spawnDelay;       // The amount of time before spawning starts.
+
+    // min spawn time for the spawner, will decrease in spawnController to a min value
     public float timeMin = 2f;
-    public float timeMax = 5f;
-    //[HideInInspector] public bool beingInvoked = false;
-    //[HideInInspector] public bool recentlyModified = false;
+
+    // spawners can spawn good guys and enemies
     public GameObject enemies;
     public GameObject goodGuy;
-
-    // Use this for initialization
-    void Start () {
-        // Start calling the Spawn function repeatedly after a delay .
-        //InvokeRepeating("Spawn", spawnDelay, spawnTime);
-    }
 	
 	// Update is called once per frame
 	void Update () {
-        //if (GameController.instance.gameOver)
-        //{
-        //    this.gameObject.SetActive(false);
-        //}
+        // if the player dies, destroy all spawners
         if (GameController.instance.gameOver)
         {
             Destroy(this.gameObject);
         }
     }
 
+    // spawn an enemy if the player has not died, invoked repeatedly in spawn controller
     public void Spawn()
     {
-        // Instantiate a random enemy.
-        //int enemyIndex = Random.Range(0, enemies.Length);
         if (!GameController.instance.gameOver)
         {
             Instantiate(enemies, transform.position, transform.rotation);
         }
     }
 
+    // spawn a good guy if the player has not died, invoked randomly in spawn controller
     public void SpawnGoodGuy()
     {
         if (!GameController.instance.gameOver)

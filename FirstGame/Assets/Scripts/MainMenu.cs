@@ -3,17 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// main menu scene
+
 public class MainMenu : MonoBehaviour {
     
+    // called when the player clicks the "Play" button
     public void PlayGame()
     {
-        // getting error on first ever run, look into it
-        //GameDetailContainer.LoadedGameDetails = DataAccess.Load();
+        // load the game scene
         SceneManager.LoadScene("Main");
     }
 
+    // called when the player clicks the "Quit" button
     public void QuitGame()
     {
+        // depending on the platform, exit the game
+        // in the case of WebGL, can't close the tab, so instead redirect player to info about game
         #if (UNITY_EDITOR)
             UnityEditor.EditorApplication.isPlaying = false;
         #elif (UNITY_STANDALONE)
@@ -22,27 +27,4 @@ public class MainMenu : MonoBehaviour {
             Application.OpenURL("https://jnicol17.github.io/BlockDodger/");
         #endif
     }
-
-
-    // Test Buttons for static variables to modify player speed from main menu when doing user testing
-
-    //public void Test2()
-    //{
-    //    Player.speedM = 2f;
-    //}
-
-    //public void Test125()
-    //{
-    //    Player.speedM = 1.25f;
-    //}
-
-    //public void Test15()
-    //{
-    //    Player.speedM = 1.5f;
-    //}
-
-    //public void Test175()
-    //{
-    //    Player.speedM = 1.75f;
-    //}
 }

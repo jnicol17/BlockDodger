@@ -4,20 +4,30 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// this class is the controls the game behaviour for everything other than enemy spawning
+
 public class GameController : MonoBehaviour {
 
+    // instance is used to ensure there is only ever one game controller
     public static GameController instance;
+
+    // gameOver is used by multiple game objects to determine behaviour in the update function
     [HideInInspector] public bool gameOver = false;
+
+    // displays when the game is over, tells player to restart or view main menu
     public GameObject gameOverText;
 
+    // player score
     private int score = 0;
     public Text scoreText;
 
+    // highscore
     public Text highscoreText;
+
+    // persistant data will be stored in gd
     GameDetails gd;
 
-    public bool newHighScore = false;
-
+    // this function ensures that there is only ever one game controller
     void Awake()
     {
         if (instance == null)
@@ -32,8 +42,13 @@ public class GameController : MonoBehaviour {
 
     // Use this for initialization  
     void Start () {
+        // set mouse to invisible
         Cursor.visible = false;
+        // load the saved browser data
         GameDetailContainer.LoadedGameDetails = DataAccess.Load();
+
+        // if there is browser data, store it in gd
+        // otherwise, create new browser data and store it in gd
         if (GameDetailContainer.LoadedGameDetails != null)
         {
             gd = GameDetailContainer.LoadedGameDetails;
@@ -49,10 +64,12 @@ public class GameController : MonoBehaviour {
     void Update()
     {
         // 0 is "Left Click"
+        // restart game
         if (gameOver && Input.GetMouseButtonDown(0))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+        // return user to main menu
         if (gameOver && Input.GetKeyDown("e"))
         {
             QuitGame();

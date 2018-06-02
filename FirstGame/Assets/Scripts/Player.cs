@@ -2,87 +2,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// player behaviour script
+
 public class Player : MonoBehaviour {
 
-    //private BoxCollider2D boxCollider;
-    //private Rigidbody2D rb2d;
-    public int speed = 10;
+    // score of the green squares
+    //private int goodGuyScore = 100;
 
-    // static speed modifier that is modified by test buttons in the main menu when doing user testing on player speed
-    public static float speedM = 1f;
+    // player height never changes
+    private float playerY = -5.46f;
 
-    public int goodGuyScore;
+    // x value can not be larger that |clampX|
+    private float clampX = 14.1f;
 
-    // Use this for initialization
-    void Start ()
-    {
-        //boxCollider = GetComponent<BoxCollider2D>();
-        //rb2d = GetComponent<Rigidbody2D>();
-	}
-
-    //void FixedUpdate()
-    //{
-    //    if (!GameController.instance.gameOver)
-    //    {
-    //        //int horizontal = (int)Input.GetAxisRaw("Horizontal");
-    //        //Vector3 movement = new Vector2(horizontal, 0);
-
-    //        //// more smooth
-    //        //float move = speed * Time.deltaTime * speedM;
-    //        //if ((transform.position.x  <= 14.1f && horizontal >= 0) || (transform.position.x >= -14.1f && horizontal <= 0))
-    //        //{
-    //        //    transform.position = Vector3.MoveTowards(transform.position, transform.position + movement, move);
-    //        //}
-    //        float x = Camera.main.ScreenToWorldPoint(Input.mousePosition).x;
-    //        if (this.transform.position.x <= 14.1f && x >= 0 || this.transform.position.x >= -14.1f && x <= 0) {
-    //            this.transform.position = new Vector2(x, this.transform.position.y);
-    //        }
-    //    }
-    //}
-
+    // called once per frame
     void Update()
     {
+        // if the player has not died
         if (!GameController.instance.gameOver)
         {
-            //int horizontal = (int)Input.GetAxisRaw("Horizontal");
-            //Vector3 movement = new Vector2(horizontal, 0);
+            // mouse movement is restricted between the two side walls
+            float x = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, -clampX, clampX);
 
-            //// more smooth
-            //float move = speed * Time.deltaTime * speedM;
-            //if ((transform.position.x  <= 14.1f && horizontal >= 0) || (transform.position.x >= -14.1f && horizontal <= 0))
-            //{
-            //    transform.position = Vector3.MoveTowards(transform.position, transform.position + movement, move);
-            //}
-            float x = Mathf.Clamp(Camera.main.ScreenToWorldPoint(Input.mousePosition).x, -14.1f, 14.1f);
-            //Debug.Log(x);
-            //if (x <= 14f && x >= -14f)
-            //{
-            this.transform.position = new Vector2(x, -5.46f);
-            //}
-            //else
-            //{
-                //this.transform.position = new Vector2(this.transform.position.x, -5.46f);
-            //}
+            // move the player to the new x position
+            this.transform.position = new Vector2(x, playerY);
         }
+
+        // if the player has died, reset them to the origin (centre of screen)
         else
         {
-            this.transform.position = new Vector2(0, -5.46f);
+            this.transform.position = new Vector2(0, playerY);
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            // remove other object from game
-            Destroy(other.gameObject);
-            // freeze player
-            GameController.instance.PlayerDied();
-        }
-        else if (other.gameObject.CompareTag("GoodGuy"))
-        {
-            GameController.instance.PlayerScored(goodGuyScore);
-            Destroy(other.gameObject);
-        }
-    }
+    //// when the player collides with enemy square or good square
+    //private void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    // enemy square, player will die
+    //    if (other.gameObject.CompareTag("Enemy"))
+    //    {
+    //        // remove enemy from game
+    //        Destroy(other.gameObject);
+    //        // freeze player at origin
+    //        GameController.instance.PlayerDied();
+    //    }
+    //    // good square, currently just a score boost, will become upgrades
+    //    else if (other.gameObject.CompareTag("GoodGuy"))
+    //    {
+    //        // add the good squares score to the current score, and destroy the good square
+    //        GameController.instance.PlayerScored(goodGuyScore);
+    //        Destroy(other.gameObject);
+    //    }
+    //}
 }
