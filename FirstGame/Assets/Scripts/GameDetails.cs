@@ -7,9 +7,13 @@
 public class GameDetails{
 
     public int highscore;
+    public bool volumeOn;
+    public int volumeNum;
 
     public GameDetails()
     {
         this.highscore = 0;
+        this.volumeOn = true;
+        this.volumeNum = 100;
     }
 }
