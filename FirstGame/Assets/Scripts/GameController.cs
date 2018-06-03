@@ -27,6 +27,11 @@ public class GameController : MonoBehaviour {
     // persistant data will be stored in gd
     GameDetails gd;
 
+    private int oldHighScore = -1;
+    public GameObject newHighScoreText;
+    public Text oldScoreText;
+    public Text newScoreText;
+
     // this function ensures that there is only ever one game controller
     void Awake()
     {
@@ -85,11 +90,19 @@ public class GameController : MonoBehaviour {
             return;
         }
 
+        // update the score text box at the bottom of the screen
         score += scoreMultiplier;
         scoreText.text = "Score: " + score.ToString();
 
         if (score > gd.highscore)
         {
+            // we will save the old highscore once in oldHighScore and display extra text on game over
+            if (oldHighScore == -1)
+            {
+                oldHighScore = gd.highscore;
+            }
+
+            // update the highscore text box in the bottom right corner with the current score
             gd.highscore = score;
             highscoreText.text = "Highscore: " + score.ToString();
         }
@@ -108,6 +121,16 @@ public class GameController : MonoBehaviour {
 
         // text that tells user to restart or return to main menu 
         gameOverText.SetActive(true);
+
+        // if oldHighScore is not -1 then it was set, only gets set if we have a new highScore
+        if (oldHighScore != -1)
+        {
+            // set the text to true and set the old and new highscore values
+            newHighScoreText.SetActive(true);
+            oldScoreText.text = "Old Highscore: " + oldHighScore;
+            newScoreText.text = "New Highscore: " + gd.highscore.ToString();
+        }
+
         // set mouse to visible
         Cursor.visible = true;
     }
