@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 // main menu scene
 
 public class MainMenu : MonoBehaviour {
-
-    //public AudioManager aM;
 
     // persistant data will be stored in gd
     GameDetails gd;
@@ -27,7 +26,6 @@ public class MainMenu : MonoBehaviour {
             gd = new GameDetails();
         }
 
-        //aM = GetComponent<AudioManager>();
     }
 
     // called when the player clicks the "Play" button
@@ -42,6 +40,7 @@ public class MainMenu : MonoBehaviour {
     {
         // depending on the platform, exit the game
         // in the case of WebGL, can't close the tab, so instead redirect player to info about game
+        DataAccess.Save(gd);
         #if (UNITY_EDITOR)
             UnityEditor.EditorApplication.isPlaying = false;
         #elif (UNITY_STANDALONE)
@@ -63,10 +62,34 @@ public class MainMenu : MonoBehaviour {
         {
             gd.volumeOn = true;
         }
-        //Debug.Log("Main Menu");
-        //Debug.Log(gd.volumeOn);
-        //Debug.Log(gd.volumeNum);
         DataAccess.Save(gd);
         AudioManager.instance.setVolume(gd); //
     }
+
+    public void MuteButton()
+    {
+        if (gd.volumeOn)
+        {
+            gd.volumeOn = false;
+        }
+        else
+        {
+            gd.volumeOn = true;
+        }
+        DataAccess.Save(gd);
+        AudioManager.instance.muteVolume(gd); //
+    }
+
+    public void SetVolume(float volume)
+    {
+        gd.volumeNum = volume;
+        DataAccess.Save(gd);
+        AudioManager.instance.setVolume(gd);
+    }
+
+    public void setVolumeSliderValue()
+    {
+        FindObjectOfType<Slider>().value = gd.volumeNum;
+    }
+
 }

@@ -45,6 +45,7 @@ public class AudioManager : MonoBehaviour {
         }
 
         createSounds(gd);
+        muteVolume(gd);
         setVolume(gd);
 
 	}
@@ -73,17 +74,15 @@ public class AudioManager : MonoBehaviour {
         // loop through the sound list
         foreach (Sound s in sounds)
         {
-            //Debug.Log("Audio Manager");
-            //Debug.Log(gd.volumeOn);
-            //Debug.Log(gd.volumeNum);
-            if (gd.volumeOn)
-            {
-                s.source.volume = gd.volumeNum;
-            }
-            else
-            {
-                s.source.volume = 0f;
-            }
+            s.source.volume = gd.volumeNum; //
+        }
+    }
+
+    public void muteVolume(GameDetails gd)
+    {
+        foreach (Sound s in sounds)
+        {
+            s.source.mute = !gd.volumeOn; //
         }
     }
 
