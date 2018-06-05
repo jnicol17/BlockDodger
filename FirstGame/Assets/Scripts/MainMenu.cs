@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI; //
 
 // main menu scene
 
 public class MainMenu : MonoBehaviour {
 
+    //public AudioManager aM;
+
     // persistant data will be stored in gd
     GameDetails gd;
-
-    public Text testText; //
 
     public void Start()
     {
@@ -27,6 +26,8 @@ public class MainMenu : MonoBehaviour {
         {
             gd = new GameDetails();
         }
+
+        //aM = GetComponent<AudioManager>();
     }
 
     // called when the player clicks the "Play" button
@@ -50,15 +51,10 @@ public class MainMenu : MonoBehaviour {
         #endif
     }
 
+    // test button
     public void TestData()
     {
-        gd.volumeNum = gd.volumeNum - 10;
-        testText.text = "Volume: " + gd.volumeNum;
-        DataAccess.Save(gd);
-    }
-
-    public void Test2()
-    {
+        gd.volumeNum = 0.1f;
         if (gd.volumeOn)
         {
             gd.volumeOn = false;
@@ -67,7 +63,10 @@ public class MainMenu : MonoBehaviour {
         {
             gd.volumeOn = true;
         }
-        testText.text = "Hi There: " + gd.volumeOn;
+        //Debug.Log("Main Menu");
+        //Debug.Log(gd.volumeOn);
+        //Debug.Log(gd.volumeNum);
         DataAccess.Save(gd);
+        AudioManager.instance.setVolume(gd); //
     }
 }

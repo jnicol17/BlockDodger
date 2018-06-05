@@ -8,12 +8,12 @@ public class GameDetails{
 
     public int highscore;
     public bool volumeOn;
-    public int volumeNum;
+    public float volumeNum;
 
     public GameDetails()
     {
         this.highscore = 0;
         this.volumeOn = true;
-        this.volumeNum = 100;
+        this.volumeNum = 1f;
     }
 }
