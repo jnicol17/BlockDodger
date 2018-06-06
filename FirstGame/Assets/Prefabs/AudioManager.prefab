@@ -53,10 +53,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: EnemyDie
-    clip: {fileID: 8300000, guid: 814656b161b44ae459b8f53aeb7f4ebe, type: 3}
+    clip: {fileID: 8300000, guid: 1b02c865e3c4ddf448b5560fbea04e5d, type: 3}
     volume: 0
     source: {fileID: 0}
   - name: Theme
-    clip: {fileID: 8300000, guid: c2e4c6f1d3db4c94b9bd6cc063f9546a, type: 3}
+    clip: {fileID: 8300000, guid: b6a4908808b21da49bfbe367eb8e00cb, type: 3}
+    volume: 0
+    source: {fileID: 0}
+  - name: PlayerDie
+    clip: {fileID: 8300000, guid: c6d129a761b6be6408a3ccbd89bc3473, type: 3}
+    volume: 0
+    source: {fileID: 0}
+  - name: GetPowerUp
+    clip: {fileID: 8300000, guid: 971ad9ba2dd5a2947965d9d3d04bccc9, type: 3}
+    volume: 0
+    source: {fileID: 0}
+  - name: ButtonClick
+    clip: {fileID: 8300000, guid: bfcd9fe778ea40a409fa82f95e6654f6, type: 3}
     volume: 0
     source: {fileID: 0}

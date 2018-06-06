@@ -50,9 +50,10 @@ public class AudioManager : MonoBehaviour {
 
 	}
 
+    // play the theme song on scene load, already created in Awake
     void Start()
     {
-        Play("Theme");
+        PlayThemeSong("Theme");
     }
 
     // create the sound objects and link the clips
@@ -65,6 +66,11 @@ public class AudioManager : MonoBehaviour {
             // create sound object and add clip
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
+            // if its the theme song, loop it
+            if (s.source.clip.name == "themesong")
+            {
+                s.source.loop = true;
+            }
         }
     }
 
@@ -78,6 +84,7 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
+    // responds to the mute button, takes the current GameDetails state, which is modified when mute is pressed
     public void muteVolume(GameDetails gd)
     {
         foreach (Sound s in sounds)
@@ -86,7 +93,19 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
+    // play the given song name if its found, otherwise don't play anything and raise no error
     public void Play (string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+        {
+            return;
+        }
+        s.source.PlayOneShot(s.source.clip);
+    }
+
+    // themesong will be looped, can't use PlayOneShot
+    public void PlayThemeSong(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         if (s == null)

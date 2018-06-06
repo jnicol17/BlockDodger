@@ -31,6 +31,7 @@ public class MainMenu : MonoBehaviour {
     // called when the player clicks the "Play" button
     public void PlayGame()
     {
+        clickButtonSound();
         // load the game scene
         SceneManager.LoadScene("Main");
     }
@@ -38,6 +39,7 @@ public class MainMenu : MonoBehaviour {
     // called when the player clicks the "Quit" button
     public void QuitGame()
     {
+
         // depending on the platform, exit the game
         // in the case of WebGL, can't close the tab, so instead redirect player to info about game
         DataAccess.Save(gd);
@@ -50,24 +52,11 @@ public class MainMenu : MonoBehaviour {
         #endif
     }
 
-    // test button
-    public void TestData()
-    {
-        gd.volumeNum = 0.1f;
-        if (gd.volumeOn)
-        {
-            gd.volumeOn = false;
-        }
-        else
-        {
-            gd.volumeOn = true;
-        }
-        DataAccess.Save(gd);
-        AudioManager.instance.setVolume(gd); //
-    }
-
+    // mute button
     public void MuteButton()
     {
+        clickButtonSound();
+        // mute if not muted, unmute if muted
         if (gd.volumeOn)
         {
             gd.volumeOn = false;
@@ -80,6 +69,7 @@ public class MainMenu : MonoBehaviour {
         AudioManager.instance.muteVolume(gd); //
     }
 
+    // change volume with volume slider
     public void SetVolume(float volume)
     {
         gd.volumeNum = volume;
@@ -87,9 +77,16 @@ public class MainMenu : MonoBehaviour {
         AudioManager.instance.setVolume(gd);
     }
 
+    // set value of volume slider when options menu is loaded
     public void setVolumeSliderValue()
     {
         FindObjectOfType<Slider>().value = gd.volumeNum;
+    }
+
+    public void clickButtonSound()
+    {
+        // play button click sound
+        FindObjectOfType<AudioManager>().Play("ButtonClick");
     }
 
 }

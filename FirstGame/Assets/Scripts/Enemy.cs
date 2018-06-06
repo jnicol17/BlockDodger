@@ -66,10 +66,12 @@ public class Enemy : MonoBehaviour {
         // if the enemy hits the player, player dies
         else if (other.gameObject.CompareTag("Player"))
         {
-
-            //FindObjectOfType<AudioManager>().
             // remove enemy from game
             Destroy(this.gameObject);
+
+            // play sound
+            FindObjectOfType<AudioManager>().Play("PlayerDie");
+
             // freeze player at origin
             GameController.instance.PlayerDied();
         }
