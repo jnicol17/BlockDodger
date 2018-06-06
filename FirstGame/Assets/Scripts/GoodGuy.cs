@@ -34,6 +34,9 @@ public class GoodGuy : MonoBehaviour {
         // if the green square touches the player, add the score and destroy the green square
         else if (other.gameObject.CompareTag("Player"))
         {
+            // play powerup sound
+            FindObjectOfType<AudioManager>().Play("GetPowerUp");
+
             // add the good squares score to the current score, and destroy the good square
             GameController.instance.PlayerScored(score);
             Destroy(this.gameObject);

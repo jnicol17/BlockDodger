@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI; //
+using UnityEngine.UI;
 
 // main menu scene
 
@@ -10,8 +10,6 @@ public class MainMenu : MonoBehaviour {
 
     // persistant data will be stored in gd
     GameDetails gd;
-
-    public Text testText; //
 
     public void Start()
     {
@@ -27,11 +25,13 @@ public class MainMenu : MonoBehaviour {
         {
             gd = new GameDetails();
         }
+
     }
 
     // called when the player clicks the "Play" button
     public void PlayGame()
     {
+        clickButtonSound();
         // load the game scene
         SceneManager.LoadScene("Main");
     }
@@ -39,8 +39,10 @@ public class MainMenu : MonoBehaviour {
     // called when the player clicks the "Quit" button
     public void QuitGame()
     {
+
         // depending on the platform, exit the game
         // in the case of WebGL, can't close the tab, so instead redirect player to info about game
+        DataAccess.Save(gd);
         #if (UNITY_EDITOR)
             UnityEditor.EditorApplication.isPlaying = false;
         #elif (UNITY_STANDALONE)
@@ -50,15 +52,11 @@ public class MainMenu : MonoBehaviour {
         #endif
     }
 
-    public void TestData()
+    // mute button
+    public void MuteButton()
     {
-        gd.volumeNum = gd.volumeNum - 10;
-        testText.text = "Volume: " + gd.volumeNum;
-        DataAccess.Save(gd);
-    }
-
-    public void Test2()
-    {
+        clickButtonSound();
+        // mute if not muted, unmute if muted
         if (gd.volumeOn)
         {
             gd.volumeOn = false;
@@ -67,7 +65,28 @@ public class MainMenu : MonoBehaviour {
         {
             gd.volumeOn = true;
         }
-        testText.text = "Hi There: " + gd.volumeOn;
         DataAccess.Save(gd);
+        AudioManager.instance.muteVolume(gd); //
     }
+
+    // change volume with volume slider
+    public void SetVolume(float volume)
+    {
+        gd.volumeNum = volume;
+        DataAccess.Save(gd);
+        AudioManager.instance.setVolume(gd);
+    }
+
+    // set value of volume slider when options menu is loaded
+    public void setVolumeSliderValue()
+    {
+        FindObjectOfType<Slider>().value = gd.volumeNum;
+    }
+
+    public void clickButtonSound()
+    {
+        // play button click sound
+        FindObjectOfType<AudioManager>().Play("ButtonClick");
+    }
+
 }

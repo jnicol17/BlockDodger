@@ -55,6 +55,9 @@ public class Enemy : MonoBehaviour {
         // if the enemy hits the ground, increase player score and destroy the enemy
         if (other.gameObject.CompareTag("Ground"))
         {
+            // play sound
+            FindObjectOfType<AudioManager>().Play("EnemyDie");
+
             // remove other object from game
             GameController.instance.PlayerScored(enemyScore);
             Destroy(this.gameObject);
@@ -65,6 +68,10 @@ public class Enemy : MonoBehaviour {
         {
             // remove enemy from game
             Destroy(this.gameObject);
+
+            // play sound
+            FindObjectOfType<AudioManager>().Play("PlayerDie");
+
             // freeze player at origin
             GameController.instance.PlayerDied();
         }
