@@ -14,6 +14,6 @@ public class GameDetails{
     {
         this.highscore = 0;
         this.volumeOn = true;
-        this.volumeNum = 1f;
+        this.volumeNum = 0.5f;
     }
 }

@@ -11,9 +11,9 @@ public class Enemy : MonoBehaviour {
     // the amount that the enemy fall speed increases
     private float increaseGravity = 0.5f;
     // the interval for increasing enemy fall speed
-    private float increaseGravityInterval = 10f;
+    private float increaseGravityInterval = 15f;
     // maximum gravity for an enemy
-    private float maxGravity = 6f;
+    private float maxGravity = 5f;
 
     // enemy score
     public int enemyScore;
