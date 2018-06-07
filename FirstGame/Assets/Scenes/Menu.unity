@@ -516,7 +516,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 584784737}
-        m_MethodName: setVolumeSliderValue
+        m_MethodName: setOptionsMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -926,6 +926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01260bce948da584fa28d6d18ad5236c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  muteButtonText: {fileID: 802128090}
 --- !u!1 &620548035
 GameObject:
   m_ObjectHideFlags: 0
@@ -1107,8 +1108,8 @@ GameObject:
   - component: {fileID: 802128091}
   - component: {fileID: 802128090}
   m_Layer: 5
-  m_Name: Text
-  m_TagString: Untagged
+  m_Name: MuteText
+  m_TagString: Mute Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1128,8 +1129,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 41.325, y: 0}
+  m_SizeDelta: {x: 82.65, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &802128090
 MonoBehaviour:
@@ -1150,7 +1151,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: MUTE
+  m_text: 'Sound: Off'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d62a573c923f5cb47b8ff65261033b90, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: d62a573c923f5cb47b8ff65261033b90, type: 2}
@@ -1185,7 +1186,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_textAlignment: 514
+  m_textAlignment: 513
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -1216,13 +1217,13 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0.46600342, y: 1.447113, z: 0.45507812, w: -0.11820984}
+  m_margin: {x: -0.5422058, y: 1.447113, z: -1.5614014, w: -0.11820984}
   m_textInfo:
     textComponent: {fileID: 802128090}
-    characterCount: 4
+    characterCount: 10
     spriteCount: 0
-    spaceCount: 0
-    wordCount: 1
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -2288,6 +2289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01260bce948da584fa28d6d18ad5236c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  muteButtonText: {fileID: 802128090}
 --- !u!1 &1890736099
 GameObject:
   m_ObjectHideFlags: 0
@@ -2301,7 +2303,7 @@ GameObject:
   - component: {fileID: 1890736101}
   m_Layer: 5
   m_Name: MuteButton
-  m_TagString: Untagged
+  m_TagString: Mute Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2322,8 +2324,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 112.45, y: 16}
-  m_SizeDelta: {x: 138.5, y: 49.4}
+  m_AnchoredPosition: {x: 140.2, y: 16}
+  m_SizeDelta: {x: 193.9, y: 49.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1890736101
 MonoBehaviour:

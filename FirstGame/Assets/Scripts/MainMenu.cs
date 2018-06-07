@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 // main menu scene
 
@@ -10,6 +11,9 @@ public class MainMenu : MonoBehaviour {
 
     // persistant data will be stored in gd
     GameDetails gd;
+
+    // create the sound button text (sound: on or sound: off)
+    public TextMeshProUGUI muteButtonText;
 
     public void Start()
     {
@@ -66,6 +70,8 @@ public class MainMenu : MonoBehaviour {
             gd.volumeOn = true;
         }
         DataAccess.Save(gd);
+        // reset mute button text
+        setMuteButton();
         AudioManager.instance.muteVolume(gd); //
     }
 
@@ -75,6 +81,31 @@ public class MainMenu : MonoBehaviour {
         gd.volumeNum = volume;
         DataAccess.Save(gd);
         AudioManager.instance.setVolume(gd);
+    }
+
+    // when the user clicks on the options menu button
+    public void setOptionsMenu()
+    {
+
+        // set the volume slider
+        setVolumeSliderValue();
+        // set the mute buttons state
+        setMuteButton();
+
+    }
+
+    // set the mute buttons value when options menu is loaded
+    public void setMuteButton()
+    {
+
+        if (gd.volumeOn)
+        {
+            muteButtonText.text = "Sound: Off";
+        }
+        else
+        {
+            muteButtonText.text = "Sound: On";
+        }
     }
 
     // set value of volume slider when options menu is loaded
