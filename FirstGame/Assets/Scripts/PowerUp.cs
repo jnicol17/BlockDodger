@@ -4,10 +4,12 @@ using UnityEngine;
 
 // green square behaviour script
 
-public class GoodGuy : MonoBehaviour {
+public class PowerUp : MonoBehaviour {
 
     [HideInInspector]public Rigidbody2D rb2d;
-    public int score = 100;
+    private int score = 100;
+
+
 
 	// Use this for initialization
 	void Start () {
@@ -17,7 +19,7 @@ public class GoodGuy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         // if the player dies, destroy all green squares currently in the game
-        if(GameController.instance.gameOver)
+        if (GameController.instance.gameOver)
         {
             Destroy(this.gameObject);
         }
@@ -34,12 +36,41 @@ public class GoodGuy : MonoBehaviour {
         // if the green square touches the player, add the score and destroy the green square
         else if (other.gameObject.CompareTag("Player"))
         {
+
             // play powerup sound
             FindObjectOfType<AudioManager>().Play("GetPowerUp");
 
-            // add the good squares score to the current score, and destroy the good square
-            GameController.instance.PlayerScored(score);
+            if (this.gameObject.name == "AddScore(Clone)")
+            {
+                addScore();
+            }
+            else if (this.gameObject.name == "DoubleScore(Clone)")
+            {
+                doublePoints();
+            }
+            else if (this.gameObject.name == "Minimize(Clone)")
+            {
+                minimize();
+            }
+
             Destroy(this.gameObject);
         }
     }
+
+    private void minimize()
+    {
+        GameController.instance.minimizeTime = Time.time + 15f;
+    }
+
+    private void doublePoints()
+    {
+        GameController.instance.multiplierTime = Time.time + 15f;
+    }
+
+    private void addScore()
+    {
+        // add the good squares score to the current score, and destroy the good square
+        GameController.instance.PlayerScored(score);
+    }
+
 }

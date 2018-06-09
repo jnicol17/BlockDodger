@@ -7,7 +7,8 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
     // player height never changes
-    private float playerY = -5.46f;
+    //public float playerY = -5.46f;
+    public float playerY;
 
     // x value can not be larger that |clampX|
     private float clampX = 14.1f;

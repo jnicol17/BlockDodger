@@ -54,7 +54,9 @@ MonoBehaviour:
   spawnTime: 5
   spawnDelay: 3
   timeMin: 2
-  timeMax: 5
-  beingInvoked: 0
   enemies: {fileID: 1515760541728176, guid: 138acc385dd48a24db04055e745f8a8e, type: 2}
-  goodGuy: {fileID: 1644032188371428, guid: 46775f8ed5fcd0741a69c954392a64a9, type: 2}
+  powerUps:
+  - {fileID: 1585811051134564, guid: a3bf5cb6348d1b44b94f54b36355865a, type: 2}
+  - {fileID: 1396269628843948, guid: cd746d7a01b4b3f40b0e71a295f0128d, type: 2}
+  - {fileID: 1633824985495550, guid: baeeabba3ace6a9419bee0089d205b30, type: 2}
+  numPowerUps: 3

@@ -32,6 +32,20 @@ public class GameController : MonoBehaviour {
     public Text oldScoreText;
     public Text newScoreText;
 
+    // default 1, set to 2 when powerup got
+    [HideInInspector]
+    public int multiplier = 1;
+
+    [HideInInspector]
+    public float multiplierTime = -1f;
+    [HideInInspector]
+    public float minimizeTime = -1f;
+
+    public GameObject player;
+
+
+    private bool disablePlayer = true;
+
     // this function ensures that there is only ever one game controller
     void Awake()
     {
@@ -62,6 +76,8 @@ public class GameController : MonoBehaviour {
         {
             gd = new GameDetails();
         }
+        minimizeTime = -1f;
+        multiplierTime = -1f;
         highscoreText.text = "Highscore: " + gd.highscore.ToString();
     }
 
@@ -79,6 +95,30 @@ public class GameController : MonoBehaviour {
         {
             QuitGame();
         }
+
+        if (multiplierTime > Time.time)
+        {
+            multiplier = 2;
+        }
+        else if (multiplierTime < Time.time && multiplierTime != -1f)
+        {
+            multiplier = 1;
+        }
+
+        if (minimizeTime > Time.time)
+        {
+            if (disablePlayer)
+            {
+                player.SetActive(false);
+                disablePlayer = false;
+            }
+        }
+        else if (minimizeTime < Time.time && minimizeTime != -1f)
+        {
+            player.SetActive(true);
+            disablePlayer = true;
+        }
+
     }
 
     // called everytime the player scores
@@ -91,7 +131,7 @@ public class GameController : MonoBehaviour {
         }
 
         // update the score text box at the bottom of the screen
-        score += scoreMultiplier;
+        score += scoreMultiplier * multiplier;
         scoreText.text = "Score: " + score.ToString();
 
         if (score > gd.highscore)
@@ -133,6 +173,10 @@ public class GameController : MonoBehaviour {
 
         // set mouse to visible
         Cursor.visible = true;
+
+        // in case player is minimized
+        player.SetActive(true);
+
     }
 
     // return to main menu

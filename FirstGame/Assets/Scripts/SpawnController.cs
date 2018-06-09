@@ -122,8 +122,8 @@ public class SpawnController : MonoBehaviour {
             int spawnGoodGuy = Random.Range(0, 1000);
             if (spawnGoodGuy == 555)
             {
-                int j = Random.Range(0, 14);
-                spawners[j].GetComponent<Spawner>().Invoke("SpawnGoodGuy", 1f);
+                int j = Random.Range(0, 15);
+                spawners[j].GetComponent<Spawner>().Invoke("SpawnPowerUp", 1f);
             }
         }
 	}

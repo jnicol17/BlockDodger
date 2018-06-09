@@ -12,10 +12,12 @@ public class Spawner : MonoBehaviour {
     // min spawn time for the spawner, will decrease in spawnController to a min value
     public float timeMin = 2f;
 
-    // spawners can spawn good guys and enemies
+    // spawners can spawn powerups and enemies
     public GameObject enemies;
-    public GameObject goodGuy;
-	
+    public GameObject[] powerUps;
+
+    public int numPowerUps;
+
 	// Update is called once per frame
 	void Update () {
         // if the player dies, destroy all spawners
@@ -35,11 +37,12 @@ public class Spawner : MonoBehaviour {
     }
 
     // spawn a good guy if the player has not died, invoked randomly in spawn controller
-    public void SpawnGoodGuy()
+    public void SpawnPowerUp()
     {
+        int index = Random.Range(0, numPowerUps);
         if (!GameController.instance.gameOver)
         {
-            Instantiate(goodGuy, transform.position, transform.rotation);
+            Instantiate(powerUps[index], transform.position, transform.rotation);
         }
     }
 }

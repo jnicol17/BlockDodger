@@ -6,9 +6,9 @@ TagManager:
   tags:
   - Enemy
   - Ground
-  - GoodGuy
   - Wall
   - Mute Button
+  - PowerUp
   layers:
   - Default
   - TransparentFX
