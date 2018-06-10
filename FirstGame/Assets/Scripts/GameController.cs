@@ -27,6 +27,7 @@ public class GameController : MonoBehaviour {
     // persistant data will be stored in gd
     GameDetails gd;
 
+    // text that is displayed when there is a new highscore
     private int oldHighScore = -1;
     public GameObject newHighScoreText;
     public Text oldScoreText;
@@ -36,15 +37,19 @@ public class GameController : MonoBehaviour {
     [HideInInspector]
     public int multiplier = 1;
 
+    // these timers are used when the player gets a powerup
     [HideInInspector]
     public float multiplierTime = -1f;
     [HideInInspector]
     public float minimizeTime = -1f;
 
-    public GameObject player;
+    // player instance that we can deactivate if minimize powerup is used
+    //public Player player;
 
-
+    // used to disable player
     private bool disablePlayer = true;
+
+    public Text powerUpText;
 
     // this function ensures that there is only ever one game controller
     void Awake()
@@ -76,47 +81,71 @@ public class GameController : MonoBehaviour {
         {
             gd = new GameDetails();
         }
+
+        // reset powerup timers everytime game is reloaded
         minimizeTime = -1f;
         multiplierTime = -1f;
+
+        // set highscore text in bottom corner to current saved high score
         highscoreText.text = "Highscore: " + gd.highscore.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // 0 is "Left Click"
-        // restart game
-        if (gameOver && Input.GetMouseButtonDown(0))
+        // if player died
+        if (gameOver)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-        // return user to main menu
-        if (gameOver && Input.GetKeyDown("e"))
-        {
-            QuitGame();
-        }
-
-        if (multiplierTime > Time.time)
-        {
-            multiplier = 2;
-        }
-        else if (multiplierTime < Time.time && multiplierTime != -1f)
-        {
-            multiplier = 1;
-        }
-
-        if (minimizeTime > Time.time)
-        {
-            if (disablePlayer)
+            // 0 is "Left Click"
+            // restart game
+            //if (gameOver && Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0))
             {
-                player.SetActive(false);
-                disablePlayer = false;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
+            // return user to main menu
+            //if (gameOver && Input.GetKeyDown("e"))
+            if (Input.GetKeyDown("e"))
+            {
+                QuitGame();
             }
         }
-        else if (minimizeTime < Time.time && minimizeTime != -1f)
+
+        else
         {
-            player.SetActive(true);
-            disablePlayer = true;
+            // multiplier time is only > Time.time if a powerup is used, 15 second timer
+            if (multiplierTime > Time.time)
+            {
+                // set score multiplier to 2x
+                multiplier = 2;
+                powerUpText.text = "DOUBLE POINTS";
+            }
+            // reset score multiplier after 15 seconds
+            else if (multiplierTime < Time.time && multiplierTime != -1f)
+            {
+                multiplier = 1;
+                powerUpText.text = "";
+            }
+
+            // minimize time is only > Time.time if a powerup is used, 15 second timer
+            if (minimizeTime > Time.time)
+            {
+                // if the player is not disabled, disable the player
+                if (disablePlayer)
+                {
+                    Player.instance.gameObject.SetActive(false);
+                    disablePlayer = false;
+                }
+                powerUpText.text = "SMALL PLAYER";
+            }
+            // reenable the player
+            else if (minimizeTime < Time.time && minimizeTime != -1f)
+            {
+                Player.instance.gameObject.SetActive(true);
+                disablePlayer = true;
+                Player.instance.transform.position = new Vector2(Player.instance.getXPosition(), Player.instance.playerY);
+                powerUpText.text = "";
+            }
         }
 
     }
@@ -152,6 +181,10 @@ public class GameController : MonoBehaviour {
     // called when the player gets hit by enemy (and dies)
     public void PlayerDied()
     {
+
+        // remove powerup text
+        powerUpText.text = "";
+
         // this boolean is used in multiple classes update functions
         gameOver = true;
         highscoreText.text = "Highscore: " + gd.highscore.ToString();
@@ -175,7 +208,7 @@ public class GameController : MonoBehaviour {
         Cursor.visible = true;
 
         // in case player is minimized
-        player.SetActive(true);
+        Player.instance.gameObject.SetActive(true);
 
     }
 

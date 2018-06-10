@@ -118,9 +118,9 @@ public class SpawnController : MonoBehaviour {
 
             }
 
-            // on every frame there is a 1/1000 chance that a spawner will spawn a green square
-            int spawnGoodGuy = Random.Range(0, 1000);
-            if (spawnGoodGuy == 555)
+            // on every frame there is a 1/1000 chance that a spawner will spawn a powerup
+            int spawnPowerUp = Random.Range(0, 1000);
+            if (spawnPowerUp == 555)
             {
                 int j = Random.Range(0, 15);
                 spawners[j].GetComponent<Spawner>().Invoke("SpawnPowerUp", 1f);

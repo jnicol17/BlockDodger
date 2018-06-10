@@ -98,7 +98,7 @@ public class MainMenu : MonoBehaviour {
     public void setMuteButton()
     {
 
-        if (gd.volumeOn)
+        if (!gd.volumeOn)
         {
             muteButtonText.text = "Sound: Off";
         }

@@ -89,7 +89,7 @@ public class AudioManager : MonoBehaviour {
     {
         foreach (Sound s in sounds)
         {
-            s.source.mute = gd.volumeOn; //
+            s.source.mute = !gd.volumeOn; //
         }
     }
 

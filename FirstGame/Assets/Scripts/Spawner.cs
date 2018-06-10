@@ -36,7 +36,7 @@ public class Spawner : MonoBehaviour {
         }
     }
 
-    // spawn a good guy if the player has not died, invoked randomly in spawn controller
+    // spawn a powerup if the player has not died, invoked randomly in spawn controller
     public void SpawnPowerUp()
     {
         int index = Random.Range(0, numPowerUps);

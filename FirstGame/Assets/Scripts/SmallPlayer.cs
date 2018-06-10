@@ -4,7 +4,8 @@ using UnityEngine;
 
 // player behaviour script
 
-public class Player : MonoBehaviour {
+public class SmallPlayer : MonoBehaviour
+{
 
     // player height never changes
     public float playerY;
@@ -12,7 +13,7 @@ public class Player : MonoBehaviour {
     // x value can not be larger that |clampX|
     private float clampX = 14.1f;
 
-    public static Player instance;
+    public static SmallPlayer instance;
 
     // this function ensures that there is only ever one game controller
     void Awake()
