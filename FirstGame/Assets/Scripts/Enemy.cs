@@ -56,7 +56,7 @@ public class Enemy : MonoBehaviour {
         if (other.gameObject.CompareTag("Ground"))
         {
             // play sound
-            FindObjectOfType<AudioManager>().Play("EnemyDie");
+            //FindObjectOfType<AudioManager>().Play("EnemyDie");
 
             // remove other object from game
             GameController.instance.PlayerScored(enemyScore);
