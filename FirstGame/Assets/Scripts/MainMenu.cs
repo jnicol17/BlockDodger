@@ -86,12 +86,17 @@ public class MainMenu : MonoBehaviour {
     // when the user clicks on the options menu button
     public void setOptionsMenu()
     {
-
+        AnimateText.instance.endC();
         // set the volume slider
         setVolumeSliderValue();
         // set the mute buttons state
         setMuteButton();
 
+    }
+
+    public void backButton()
+    {
+        AnimateText.instance.startC();
     }
 
     // set the mute buttons value when options menu is loaded

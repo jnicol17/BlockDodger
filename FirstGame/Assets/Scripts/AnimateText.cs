@@ -2,20 +2,42 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class AnimateText : MonoBehaviour {
 
-    public Text textBox;
+    public static AnimateText instance;
+
+    public TextMeshProUGUI textBox;
     //Store all your text in this string array
-    string title = "_B_L_O_C_K_D_O_D_G_E_R_";
-    bool isUnderScore = true;
-    private int test = 23;
+    string title = "BLOCKDODGER";
+    bool test = true;
     int currentlyDisplayingText = 0;
 
     void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
         StartCoroutine(AnimateTitle());
     }
+
+
+    public void startC()
+    {
+        StartCoroutine(AnimateCursor());
+    }
+
+    public void endC()
+    {
+        StopAllCoroutines();
+    }
+
     //This is a function for a button you press to skip to the next text
     public void SkipToNextText()
     {
@@ -33,15 +55,28 @@ public class AnimateText : MonoBehaviour {
     {
         foreach (char letter in title.ToCharArray())
         {
-            if (isUnderScore)
+            textBox.text += letter;
+            yield return new WaitForSeconds(.2f);
+        }
+        StartCoroutine(AnimateCursor());
+    }
+
+    IEnumerator AnimateCursor()
+    {
+        while (true)
+        {
+            if (test)
             {
-                textBox.text += letter;
+                textBox.text = "BLOCKDODGER_";
+                test = !test;
+                yield return new WaitForSeconds(.2f);
             }
             else
             {
-                textBox.text = "_" ;
+                textBox.text = "BLOCKDODGER";
+                test = !test;
+                yield return new WaitForSeconds(.2f);
             }
-            yield return new WaitForSeconds(.2f);
         }
     }
 
