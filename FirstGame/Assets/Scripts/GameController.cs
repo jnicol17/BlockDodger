@@ -103,12 +103,14 @@ public class GameController : MonoBehaviour {
             //if (gameOver && Input.GetMouseButtonDown(0))
             if (Input.GetMouseButtonDown(0))
             {
+                AudioManager.instance.PlayThemeSong("Theme");
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
             // return user to main menu
             //if (gameOver && Input.GetKeyDown("e"))
             if (Input.GetKeyDown("e"))
             {
+                AudioManager.instance.PlayThemeSong("Theme");
                 QuitGame();
             }
         }
@@ -212,6 +214,7 @@ public class GameController : MonoBehaviour {
 
         // in case player is minimized
         Player.instance.gameObject.SetActive(true);
+        AudioManager.instance.StopThemeSong("Theme");
 
     }
 

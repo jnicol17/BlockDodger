@@ -119,8 +119,7 @@ public class SpawnController : MonoBehaviour {
             }
 
             // on every frame there is a 1/1000 chance that a spawner will spawn a powerup
-            int spawnPowerUp = Random.Range(500, 600);
-            //int spawnPowerUp = Random.Range(0, 1000);
+            int spawnPowerUp = Random.Range(0, 1000);
             if (spawnPowerUp == 555)
             {
                 int j = Random.Range(0, 15);

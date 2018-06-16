@@ -67,7 +67,7 @@ public class AudioManager : MonoBehaviour {
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
             // if its the theme song, loop it
-            if (s.source.clip.name == "themesong")
+            if (s.source.clip.name == "Themesong")
             {
                 s.source.loop = true;
             }
@@ -113,5 +113,15 @@ public class AudioManager : MonoBehaviour {
             return;
         }
         s.source.Play();
+    }
+
+    public void StopThemeSong(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s == null)
+        {
+            return;
+        }
+        s.source.Stop();
     }
 }
