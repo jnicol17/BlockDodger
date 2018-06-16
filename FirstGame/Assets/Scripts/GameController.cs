@@ -63,7 +63,7 @@ public class GameController : MonoBehaviour {
             Destroy(gameObject);
         }
         // 0 for no sync, 1 for panel refresh rate, 2 for 1/2 panel rate
-        QualitySettings.vSyncCount = 1;
+        //QualitySettings.vSyncCount = 1;
     }
 
     // Use this for initialization  
