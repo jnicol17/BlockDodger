@@ -115,8 +115,9 @@ public class GameController : MonoBehaviour {
 
         else
         {
+            powerUpText.text = "";
             // multiplier time is only > Time.time if a powerup is used, 15 second timer
-            if (multiplierTime > Time.time)
+            if (multiplierTime > Time.time && multiplierTime > minimizeTime)
             {
                 // set score multiplier to 2x
                 multiplier = 2;
@@ -130,7 +131,7 @@ public class GameController : MonoBehaviour {
             }
 
             // minimize time is only > Time.time if a powerup is used, 15 second timer
-            if (minimizeTime > Time.time)
+            if (minimizeTime > Time.time && minimizeTime > multiplierTime)
             {
                 // if the player is not disabled, disable the player
                 if (disablePlayer)
