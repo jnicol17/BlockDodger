@@ -100,7 +100,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb2d: {fileID: 0}
-  score: 100
 --- !u!212 &212338454733198266
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -136,8 +135,8 @@ SpriteRenderer:
   m_SortingLayerID: -1199232237
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 65a91b413858a504e95e9a8c3d512191, type: 3}
-  m_Color: {r: 0.17132434, g: 0.6603774, b: 0.21735285, a: 1}
+  m_Sprite: {fileID: 21300000, guid: ddca5349da6642949b801873ebdc1efb, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
