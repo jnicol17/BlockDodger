@@ -142,7 +142,7 @@ public class GameController : MonoBehaviour {
                     Player.instance.gameObject.SetActive(false);
                     disablePlayer = false;
                 }
-                powerUpText.text = "SMALL PLAYER";
+                powerUpText.text = "MINIMIZE";
             }
             // reenable the player
             else if (minimizeTime < Time.time && minimizeTime != -1f)
