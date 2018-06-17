@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 // this class is the controls the game behaviour for everything other than enemy spawning
 
@@ -19,10 +20,10 @@ public class GameController : MonoBehaviour {
 
     // player score
     private int score = 0;
-    public Text scoreText;
+    public TextMeshProUGUI scoreText;
 
     // highscore
-    public Text highscoreText;
+    public TextMeshProUGUI highscoreText;
 
     // persistant data will be stored in gd
     GameDetails gd;
@@ -129,7 +130,7 @@ public class GameController : MonoBehaviour {
             else if (multiplierTime < Time.time && multiplierTime != -1f)
             {
                 multiplier = 1;
-                powerUpText.text = "";
+                //powerUpText.text = "";
             }
 
             // minimize time is only > Time.time if a powerup is used, 15 second timer
@@ -149,7 +150,7 @@ public class GameController : MonoBehaviour {
                 Player.instance.gameObject.SetActive(true);
                 disablePlayer = true;
                 Player.instance.transform.position = new Vector2(Player.instance.getXPosition(), Player.instance.playerY);
-                powerUpText.text = "";
+                //powerUpText.text = "";
             }
         }
 
