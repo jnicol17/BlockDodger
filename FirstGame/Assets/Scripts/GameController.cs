@@ -50,7 +50,7 @@ public class GameController : MonoBehaviour {
     // used to disable player
     private bool disablePlayer = true;
 
-    public Text powerUpText;
+    public TextMeshProUGUI powerUpText;
 
     // this function ensures that there is only ever one game controller
     void Awake()
