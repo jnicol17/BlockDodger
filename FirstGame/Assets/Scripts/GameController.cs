@@ -31,8 +31,8 @@ public class GameController : MonoBehaviour {
     // text that is displayed when there is a new highscore
     private int oldHighScore = -1;
     public GameObject newHighScoreText;
-    public Text oldScoreText;
-    public Text newScoreText;
+    public TextMeshProUGUI oldScoreText;
+    public TextMeshProUGUI newScoreText;
 
     // default 1, set to 2 when powerup got
     [HideInInspector]
