@@ -105,11 +105,11 @@ public class MainMenu : MonoBehaviour {
 
         if (!gd.volumeOn)
         {
-            muteButtonText.text = "Sound: Off";
+            muteButtonText.text = "Off";
         }
         else
         {
-            muteButtonText.text = "Sound: On";
+            muteButtonText.text = "On";
         }
     }
 
