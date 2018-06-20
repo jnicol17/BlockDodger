@@ -75,6 +75,7 @@ public class PowerUp : MonoBehaviour {
     // add a flat score amount
     private void addScore()
     {
+        GameController.instance.addScoreTime = Time.time + 1f;
         // add the good squares score to the current score, and destroy the good square
         GameController.instance.PlayerScored(score);
     }
