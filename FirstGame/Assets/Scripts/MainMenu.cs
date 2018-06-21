@@ -125,4 +125,17 @@ public class MainMenu : MonoBehaviour {
         FindObjectOfType<AudioManager>().Play("ButtonClick");
     }
 
+    public void test()
+    {
+        Screen.fullScreen = !Screen.fullScreen;
+        if (Cursor.lockState == CursorLockMode.Confined)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+    }
+
 }
